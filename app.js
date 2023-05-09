@@ -1,3 +1,7 @@
+// Assign variables for score tracking for both the player and computer.
+let playerScore = 0;
+let computerScore = 0;
+
 // Function to generate random choice for computer.
 function getComputerChoice() {
   // Set rock paper and scissors inside an array called possibleChoices.
@@ -18,34 +22,52 @@ function playRound(playerSelection, computerSelection) {
   // If statement for game rock paper scissors game logic
   if (playerSelection == computerSelection) {
     return "It's a Tie";
-
     // Outer IF Statement is player choice
   } else if (playerSelection == "rock") {
     // Inner IF Statement is computer choice
     if (computerSelection == "paper") {
+      computerScore++;
       return "You Lose, Paper beats Rock";
     } else {
+      playerScore++;
       return "You Win, Rock beats Scissors";
     }
   } else if (playerSelection == "paper") {
     if (computerSelection == "scissors") {
+      computerScore++;
       return "You Lose, Scissors beats Paper";
     } else {
+      playerScore++;
       return "You Win, Paper beats Rock";
     }
   } else if (playerSelection == "scissors") {
     if (computerSelection == "rock") {
+      computerScore++;
       return "You Lose, Rock beats Scissors";
     } else {
+      playerScore++;
       return "You Win, Scissors beats Paper";
     }
-    // Else to Cover faulty Inputs out of range of IF Statement.
+    // Else to Cover Inputs out of range of IF Statement.
   } else {
     return "Issue with Input";
   }
 }
 
-const playerSelection = "paper";
-const computerSelection = getComputerChoice();
-console.log(computerSelection);
-console.log(playRound(playerSelection, computerSelection));
+// Function to play a 5 round game
+function game() {
+  // Use Do while loop to loop while both player score and computer scores are less than 5
+  do {
+    const playerSelection = prompt("Please enter your Selection");
+    const computerSelection = getComputerChoice();
+    console.log(playRound(playerSelection, computerSelection));
+  } while (playerScore < 5 && computerScore < 5);
+
+  if (playerScore > computerScore) {
+    return "Player wins";
+  } else {
+    return "Computer wins";
+  }
+}
+
+console.log(game());
